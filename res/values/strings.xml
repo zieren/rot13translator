@@ -5,6 +5,7 @@
 <string name="translation">Translation:</string>
 <string name="copy">Copy</string>
 <string name="paste">Paste</string>
+<string name="clear">Clear</string>
 <string name="exit">Exit</string>
 <string name="translation_copied">Translation copied to clipboard.</string>
 <string name="about">About</string>

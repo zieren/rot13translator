@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,14 +15,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Translate text using the ROT13 cipher.
+ *
+ * @author jz
+ */
 public class TranslatorActivity extends Activity {
+  /**
+   * Maximum text length. This should be enough for most use cases, and still
+   * avoid the app from slowing down too much.
+   */
+  private static final int MAX_TEXT_LENGTH = 4096;
+
+  /** Lookup table for ROT13 translation. */
   private static final char[] LUT;
+  /** UI component. */
   private EditText textInput;
+  /** UI component. */
   private ScrollingEditText textOutput;
+  /** Used for copy/paste from output or to input, respectively. */
   private ClipboardManager clipboard;
 
-  // TODO
+  /** Dialog ID. */
   private static final int DIALOG_ABOUT_ID = 1;
+  /** Dialog ID. */
   private static final int DIALOG_HELP_ID = 2;
 
   // Initialize lookup table.
@@ -40,7 +57,6 @@ public class TranslatorActivity extends Activity {
     }
   }
 
-  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -50,16 +66,7 @@ public class TranslatorActivity extends Activity {
     textInput = (EditText) findViewById(R.id.text_input);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-    final Button button_exit = (Button) findViewById(R.id.button_exit);
-    button_exit.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        textInput.setText("");
-        textOutput.setText("");
-        finish();
-      }
-    });
-
-    final Button button_copy = (Button) findViewById(R.id.button_copy);
+    final Button button_copy = (Button) findViewById(R.id.buttonCopy);
     button_copy.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         clipboard.setText(textOutput.getText());
@@ -67,10 +74,27 @@ public class TranslatorActivity extends Activity {
       }
     });
 
-    final Button button_paste = (Button) findViewById(R.id.button_paste);
-    button_paste.setOnClickListener(new View.OnClickListener() {
+    final Button buttonPaste = (Button) findViewById(R.id.buttonPaste);
+    buttonPaste.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         textInput.setText(clipboard.getText());
+      }
+    });
+
+    final Button buttonClear = (Button) findViewById(R.id.buttonClear);
+    buttonClear.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        textInput.setText("");
+        textOutput.setText("");
+      }
+    });
+
+    final Button button_exit = (Button) findViewById(R.id.buttonExit);
+    button_exit.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        textInput.setText("");
+        textOutput.setText("");
+        finish();
       }
     });
 
@@ -82,23 +106,16 @@ public class TranslatorActivity extends Activity {
       }
       public void onTextChanged(CharSequence s, int start, int before,
           int count) {
-        StringBuffer delta = translateROT13(s, start, count);
+        final StringBuffer delta = translateROT13(s, start, count);
         StringBuffer translation = new StringBuffer(textOutput.getText());
         translation.replace(start, start + before, delta.toString());
         textOutput.setText(translation);
         textOutput.setOffsetToView(start + count);
       }
     });
-  }
-
-  // TODO incremental?
-  // TODO keep only one!?
-  private String translateROT13(String input) {
-    char[] out = new char[input.length()];
-    for (int i = 0; i < input.length(); ++i) {
-      out[i] = LUT[input.charAt(i)];
-    }
-    return new String(out);
+    textInput.setFilters(new InputFilter[] {
+        new InputFilter.LengthFilter(MAX_TEXT_LENGTH)
+    });
   }
 
   /** Returns a translation of the interval [start, start+count). */
