@@ -9,5 +9,7 @@
 <string name="exit">Exit</string>
 <string name="translation_copied">Translation copied to clipboard.</string>
 <string name="about">About</string>
+<string name="about_text">© 2010 Jörg Zieren\nhttp://zieren.de\nLicense: GPL</string>
 <string name="help">Help</string>
+<string name="help_text">Help Text</string>
 </resources>
