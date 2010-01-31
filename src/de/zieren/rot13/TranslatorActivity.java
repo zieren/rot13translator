@@ -66,7 +66,7 @@ public class TranslatorActivity extends Activity {
     textInput = (EditText) findViewById(R.id.text_input);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-    final Button button_copy = (Button) findViewById(R.id.buttonCopy);
+    final Button button_copy = (Button) findViewById(R.id.button_copy);
     button_copy.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         clipboard.setText(textOutput.getText());
@@ -74,14 +74,14 @@ public class TranslatorActivity extends Activity {
       }
     });
 
-    final Button buttonPaste = (Button) findViewById(R.id.buttonPaste);
+    final Button buttonPaste = (Button) findViewById(R.id.button_paste);
     buttonPaste.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         textInput.setText(clipboard.getText());
       }
     });
 
-    final Button buttonClear = (Button) findViewById(R.id.buttonClear);
+    final Button buttonClear = (Button) findViewById(R.id.button_clear);
     buttonClear.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         textInput.setText("");
@@ -89,7 +89,7 @@ public class TranslatorActivity extends Activity {
       }
     });
 
-    final Button button_exit = (Button) findViewById(R.id.buttonExit);
+    final Button button_exit = (Button) findViewById(R.id.button_exit);
     button_exit.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         textInput.setText("");
@@ -141,15 +141,15 @@ public class TranslatorActivity extends Activity {
     case DIALOG_ABOUT_ID:
       dialog = new Dialog(this);
       dialog.setContentView(R.layout.about);
-      dialog.setTitle("Custom Dialog");  // TODO -> xml
-//      TextView text = (TextView) dialog.findViewById(R.id.about_text);
+      dialog.setTitle(R.string.app_name);
       break;
     case DIALOG_HELP_ID:
       AlertDialog.Builder builder = new AlertDialog.Builder(this);
       builder.setTitle("foo1");
       dialog = builder.create();
+      break;
     }
-    assert dialog != null : "Invalid dialog ID: " + id;
+    assert dialog != null : "invalid dialog ID: " + id;
     return dialog;
   }
 
@@ -162,8 +162,9 @@ public class TranslatorActivity extends Activity {
     case R.id.option_help:
       showDialog(DIALOG_HELP_ID);
       break;
+    default:
+      assert false : "invalid menu item ID: " + item.getItemId();
     }
     return true;
-    // TODO catch invalid
   }
 }
