@@ -1,7 +1,6 @@
 package de.zieren.rot13;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.ClipboardManager;
@@ -144,9 +143,9 @@ public class TranslatorActivity extends Activity {
       dialog.setTitle(R.string.app_name);
       break;
     case DIALOG_HELP_ID:
-      AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      builder.setTitle("foo1");
-      dialog = builder.create();
+      dialog = new Dialog(this);
+      dialog.setContentView(R.layout.help);
+      dialog.setTitle(R.string.help_title);
       break;
     }
     assert dialog != null : "invalid dialog ID: " + id;
