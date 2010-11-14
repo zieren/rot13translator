@@ -1,7 +1,9 @@
 package de.zieren.rot13;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Editable;
@@ -69,7 +71,9 @@ public class TranslatorActivity extends Activity {
     button_copy.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         clipboard.setText(textOutput.getText());
-        Toast.makeText(getApplicationContext(), R.string.translation_copied, 3).show();
+        Toast.makeText(getApplicationContext(),
+                       R.string.translation_copied,
+                       3).show();
       }
     });
 
@@ -77,6 +81,11 @@ public class TranslatorActivity extends Activity {
     buttonPaste.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         textInput.setText(clipboard.getText());
+        if (clipboard.getText().length() == 0) {
+          Toast.makeText(getApplicationContext(),
+                         R.string.clipboard_empty,
+                         3).show();
+        }
       }
     });
 
@@ -100,11 +109,11 @@ public class TranslatorActivity extends Activity {
     textInput.addTextChangedListener(new TextWatcher() {
       public void afterTextChanged(Editable editable) {
       }
-      public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-          int arg3) {
+      public void beforeTextChanged(
+          CharSequence arg0, int arg1, int arg2, int arg3) {
       }
-      public void onTextChanged(CharSequence s, int start, int before,
-          int count) {
+      public void onTextChanged(
+          CharSequence s, int start, int before, int count) {
         final StringBuffer delta = translateROT13(s, start, count);
         StringBuffer translation = new StringBuffer(textOutput.getText());
         translation.replace(start, start + before, delta.toString());
@@ -118,8 +127,8 @@ public class TranslatorActivity extends Activity {
   }
 
   /** Returns a translation of the interval [start, start+count). */
-  private StringBuffer translateROT13(CharSequence input, int start,
-      int count) {
+  private StringBuffer translateROT13(
+      CharSequence input, int start, int count) {
     StringBuffer translation = new StringBuffer();
     for (int i = 0; i < count; ++i) {
       translation.append(LUT[input.charAt(start + i)]);
@@ -137,16 +146,33 @@ public class TranslatorActivity extends Activity {
   protected Dialog onCreateDialog(int id) {
     Dialog dialog = null;
     switch (id) {
-    case DIALOG_ABOUT_ID:
-      dialog = new Dialog(this);
-      dialog.setContentView(R.layout.about);
-      dialog.setTitle(R.string.app_name);
-      break;
-    case DIALOG_HELP_ID:
-      dialog = new Dialog(this);
-      dialog.setContentView(R.layout.help);
-      dialog.setTitle(R.string.help_title);
-      break;
+      case DIALOG_ABOUT_ID: {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.about_text)
+               .setTitle(R.string.about_title)
+               .setIcon(R.drawable.icon)
+               .setNeutralButton(R.string.ok,
+                 new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                     dismissDialog(DIALOG_ABOUT_ID);
+                   }
+                 });
+        dialog = builder.create();
+        break;
+      }
+      case DIALOG_HELP_ID: {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.help_text)
+               .setTitle(R.string.help_title)
+               .setNeutralButton(R.string.ok,
+                 new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                     dismissDialog(DIALOG_HELP_ID);
+                   }
+                 });
+        dialog = builder.create();
+        break;
+      }
     }
     assert dialog != null : "invalid dialog ID: " + id;
     return dialog;
