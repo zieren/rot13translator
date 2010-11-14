@@ -313,9 +313,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="388.76476"
-     inkscape:cy="294.07511"
+     inkscape:zoom="1.4"
+     inkscape:cx="282.42674"
+     inkscape:cy="271.53655"
      inkscape:document-units="px"
      inkscape:current-layer="g3825"
      showgrid="false"
@@ -332,7 +332,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -422,7 +422,10 @@
        inkscape:export-ydpi="14.06498">
       <g
          id="g3808"
-         transform="translate(0,-25.150482)">
+         transform="translate(0,-25.150482)"
+         inkscape:export-filename="D:\dev\rot13\res\drawable-hdpi\icon.png"
+         inkscape:export-xdpi="13.8"
+         inkscape:export-ydpi="13.8">
         <path
            inkscape:export-ydpi="9.7399998"
            inkscape:export-xdpi="9.7399998"
@@ -441,12 +444,15 @@
            inkscape:connector-curvature="0" />
       </g>
       <rect
-         style="fill:none;stroke:#000000;stroke-width:1.23212814;stroke-opacity:1"
+         style="fill:none;stroke:none;stroke-width:1.23212813999999990;stroke-opacity:1"
          id="rect3038"
          width="442.19525"
          height="442.17886"
          x="112.01412"
-         y="533.80695" />
+         y="533.80695"
+         inkscape:export-filename="D:\dev\rot13\res\drawable-hdpi\icon.png"
+         inkscape:export-xdpi="13.8"
+         inkscape:export-ydpi="13.8" />
     </g>
   </g>
 </svg>
