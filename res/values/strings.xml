@@ -7,10 +7,12 @@
 <string name="paste">Paste</string>
 <string name="clear">Clear</string>
 <string name="exit">Exit</string>
+<string name="ok">OK</string>
 <string name="translation_copied">Translation copied to clipboard.</string>
+<string name="clipboard_empty">Clipboard is empty.</string>
 <string name="about_menuitem">About</string>
-<string name="about_title">About</string>
-<string name="about_text">© 2010 Jörg Zieren\nhttp://zieren.de\nLicense: GPL</string>
+<string name="about_title">ROT13 Translator</string>
+<string name="about_text">Version: 1.0\n© 2010 Jörg Zieren\nhttp://zieren.de\nLicense: GPL</string>
 <string name="help_menuitem">Help</string>
 <string name="help_title">ROT13 Translator Help</string>
 <string name="help_text">Enter the text to be translated in the upper box
