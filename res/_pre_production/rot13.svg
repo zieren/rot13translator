@@ -314,8 +314,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="282.42674"
-     inkscape:cy="271.53655"
+     inkscape:cx="193.14103"
+     inkscape:cy="329.50701"
      inkscape:document-units="px"
      inkscape:current-layer="g3825"
      showgrid="false"
@@ -422,10 +422,10 @@
        inkscape:export-ydpi="14.06498">
       <g
          id="g3808"
-         transform="translate(0,-25.150482)"
-         inkscape:export-filename="D:\dev\rot13\res\drawable-hdpi\icon.png"
-         inkscape:export-xdpi="13.8"
-         inkscape:export-ydpi="13.8">
+         transform="translate(0.30395638,-25.766526)"
+         inkscape:export-filename="D:\dev\rot13\apk\icon-512.png"
+         inkscape:export-xdpi="103.88"
+         inkscape:export-ydpi="103.88">
         <path
            inkscape:export-ydpi="9.7399998"
            inkscape:export-xdpi="9.7399998"
@@ -444,15 +444,15 @@
            inkscape:connector-curvature="0" />
       </g>
       <rect
-         style="fill:none;stroke:none;stroke-width:1.23212813999999990;stroke-opacity:1"
+         style="fill:none;stroke:none"
          id="rect3038"
-         width="442.19525"
-         height="442.17886"
-         x="112.01412"
-         y="533.80695"
-         inkscape:export-filename="D:\dev\rot13\res\drawable-hdpi\icon.png"
-         inkscape:export-xdpi="13.8"
-         inkscape:export-ydpi="13.8" />
+         width="443.41101"
+         height="443.41101"
+         x="111.71019"
+         y="532.57483"
+         inkscape:export-filename="D:\dev\rot13\apk\icon-512.png"
+         inkscape:export-xdpi="103.88"
+         inkscape:export-ydpi="103.88" />
     </g>
   </g>
 </svg>
