@@ -12,7 +12,7 @@
 <string name="clipboard_empty">Clipboard is empty.</string>
 <string name="about_menuitem">About</string>
 <string name="about_title">ROT13 Translator</string>
-<string name="about_text">Version: 1.0\n© 2010 Jörg Zieren\nhttp://zieren.de\nLicense: GPL</string>
+<string name="about_text">Version: 1.1\n© 2013 Jörg Zieren\nhttp://zieren.de\nLicense: GPL</string>
 <string name="help_menuitem">Help</string>
 <string name="help_title">ROT13 Translator Help</string>
 <string name="help_text">Enter the text to be translated in the upper box

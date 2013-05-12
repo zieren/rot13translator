@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+// TODO(jz): Add icons back to menus.
+// TODO(jz): Add xhdpi app icon.
+
 /**
  * Translate text using the ROT13 cipher.
  *
@@ -33,7 +36,7 @@ public class TranslatorActivity extends Activity {
   /** UI component. */
   private EditText textInput;
   /** UI component. */
-  private ScrollingEditText textOutput;
+  private ScrollingTextView textOutput;
   /** Used for copy/paste from output or to input, respectively. */
   private ClipboardManager clipboard;
 
@@ -63,7 +66,7 @@ public class TranslatorActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    textOutput = (ScrollingEditText) findViewById(R.id.text_output);
+    textOutput = (ScrollingTextView) findViewById(R.id.text_output);
     textInput = (EditText) findViewById(R.id.text_input);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
@@ -131,6 +134,7 @@ public class TranslatorActivity extends Activity {
       CharSequence input, int start, int count) {
     StringBuffer translation = new StringBuffer();
     for (int i = 0; i < count; ++i) {
+      // TODO(jz): It is apparently possible to enter chars >= 256. Repro & fix.
       translation.append(LUT[input.charAt(start + i)]);
     }
     return translation;
