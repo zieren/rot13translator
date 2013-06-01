@@ -14,10 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 // TODO(jz): Add icons back to menus.
 // TODO(jz): Add xhdpi app icon.
+// TODO(jz): Text in output window is gray; should be black (and same size as in
+// input).
 
 /**
  * Translate text using the ROT13 cipher.
@@ -36,7 +39,7 @@ public class TranslatorActivity extends Activity {
   /** UI component. */
   private EditText textInput;
   /** UI component. */
-  private ScrollingTextView textOutput;
+  private TextView textOutput;
   /** Used for copy/paste from output or to input, respectively. */
   private ClipboardManager clipboard;
 
@@ -66,7 +69,7 @@ public class TranslatorActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    textOutput = (ScrollingTextView) findViewById(R.id.text_output);
+    textOutput = (TextView) findViewById(R.id.text_output);
     textInput = (EditText) findViewById(R.id.text_input);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
@@ -121,7 +124,8 @@ public class TranslatorActivity extends Activity {
         StringBuffer translation = new StringBuffer(textOutput.getText());
         translation.replace(start, start + before, delta.toString());
         textOutput.setText(translation);
-        textOutput.setOffsetToView(start + count);
+        // TODO(jz): Minor bug: It seems this doesn't happen on paste.
+        textOutput.bringPointIntoView(start +count);
       }
     });
     textInput.setFilters(new InputFilter[] {

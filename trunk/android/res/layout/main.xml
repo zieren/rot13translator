@@ -13,7 +13,7 @@
 
   <EditText
     android:id="@+id/text_input"
-    android:inputType="text"
+    android:inputType="textMultiLine"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:drawable/edit_text"
@@ -29,7 +29,7 @@
     android:layout_weight="0"
   />
 
-  <de.zieren.rot13.ScrollingTextView
+  <TextView
     android:id="@+id/text_output"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
