@@ -139,8 +139,9 @@ public class TranslatorActivity extends Activity {
       CharSequence input, int start, int count) {
     StringBuffer translation = new StringBuffer();
     for (int i = 0; i < count; ++i) {
-      // TODO(jz): It is apparently possible to enter chars >= 256. Repro & fix.
-      translation.append(LUT[input.charAt(start + i)]);
+      char c = input.charAt(start + i);
+      // It's possible to enter non-ASCII characters >= 256. Just copy those.
+      translation.append(c < 256 ? LUT[c] : c);
     }
     return translation;
   }
