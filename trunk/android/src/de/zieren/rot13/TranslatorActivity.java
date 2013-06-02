@@ -69,8 +69,8 @@ public class TranslatorActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    textOutput = (TextView) findViewById(R.id.text_output);
     textInput = (EditText) findViewById(R.id.text_input);
+    textOutput = (TextView) findViewById(R.id.text_output);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
     final Button button_copy = (Button) findViewById(R.id.button_copy);
