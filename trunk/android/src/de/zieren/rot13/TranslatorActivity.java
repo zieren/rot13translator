@@ -19,8 +19,9 @@ import android.widget.Toast;
 
 // TODO(jz): Add icons back to menus.
 // TODO(jz): Add xhdpi app icon.
-// TODO(jz): Text in output window is gray; should be black (and same size as in
-// input).
+
+// TODO(jz): Eventually fix deprecation issues (when the number of users with
+// old versions is sufficiently low; currently it's 28% below API 11).
 
 /**
  * Translate text using the ROT13 cipher.
