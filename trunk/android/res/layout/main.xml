@@ -20,6 +20,8 @@
     android:gravity="top"
     android:layout_weight="1"
     android:inputType="textMultiLine"
+    android:textColor="@null"
+    android:textCursorDrawable="@null"
   />
 
   <TextView
@@ -39,6 +41,8 @@
     android:gravity="top"
     android:layout_weight="1"
     android:inputType="none"
+    android:textColor="@null"
+    android:textCursorDrawable="@null"
   />
 
   <LinearLayout
