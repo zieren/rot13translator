@@ -79,7 +79,7 @@ public class TranslatorActivity extends Activity {
         clipboard.setText(textOutput.getText());
         Toast.makeText(getApplicationContext(),
                        R.string.translation_copied,
-                       3).show();
+                       Toast.LENGTH_LONG).show();
       }
     });
 
@@ -90,7 +90,7 @@ public class TranslatorActivity extends Activity {
         if (clipboard.getText().length() == 0) {
           Toast.makeText(getApplicationContext(),
                          R.string.clipboard_empty,
-                         3).show();
+                         Toast.LENGTH_LONG).show();
         }
       }
     });
