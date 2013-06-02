@@ -13,13 +13,13 @@
 
   <EditText
     android:id="@+id/text_input"
-    android:inputType="textMultiLine"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:drawable/edit_text"
     android:scrollbars="vertical"
     android:gravity="top"
     android:layout_weight="1"
+    android:inputType="textMultiLine"
   />
 
   <TextView
@@ -29,14 +29,16 @@
     android:layout_weight="0"
   />
 
-  <TextView
+  <EditText
     android:id="@+id/text_output"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:drawable/edit_text"
+    android:textIsSelectable="true"
     android:scrollbars="vertical"
     android:gravity="top"
     android:layout_weight="1"
+    android:inputType="none"
   />
 
   <LinearLayout
