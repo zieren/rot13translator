@@ -17,8 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO(jz): Add xhdpi app icon.
-
 // TODO(jz): Eventually fix deprecation issues (when the number of users with
 // old versions is sufficiently low; currently it's 28% below API 11).
 
@@ -125,7 +123,7 @@ public class TranslatorActivity extends Activity {
         translation.replace(start, start + before, delta.toString());
         textOutput.setText(translation);
         // TODO(jz): Minor bug: It seems this doesn't happen on paste.
-        textOutput.bringPointIntoView(start +count);
+        textOutput.bringPointIntoView(start + count);
       }
     });
     textInput.setFilters(new InputFilter[] {
