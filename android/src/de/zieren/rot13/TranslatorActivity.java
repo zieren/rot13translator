@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO(jz): Add icons back to menus.
 // TODO(jz): Add xhdpi app icon.
 
 // TODO(jz): Eventually fix deprecation issues (when the number of users with
