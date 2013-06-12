@@ -9,6 +9,7 @@ import android.text.ClipboardManager;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,6 +71,8 @@ public class TranslatorActivity extends Activity {
     textInput = (EditText) findViewById(R.id.text_input);
     textOutput = (TextView) findViewById(R.id.text_output);
     clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+    // This is required to make TextView.bringPointIntoView() work:
+    textOutput.setMovementMethod(new ScrollingMovementMethod());
 
     final Button button_copy = (Button) findViewById(R.id.button_copy);
     button_copy.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +125,6 @@ public class TranslatorActivity extends Activity {
         StringBuffer translation = new StringBuffer(textOutput.getText());
         translation.replace(start, start + before, delta.toString());
         textOutput.setText(translation);
-        // TODO(jz): Minor bug: It seems this doesn't happen on paste.
         textOutput.bringPointIntoView(start + count);
       }
     });
