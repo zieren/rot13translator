@@ -13,6 +13,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+//import android.view.View.OnLayoutChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +21,12 @@ import android.widget.Toast;
 
 // TODO(jz): Eventually fix deprecation issues (when the number of users with
 // old versions is sufficiently low; currently it's 28% below API 11).
+
+
+// TODO(jz): Flaw: When text areas are small due to the keyboard being shown,
+// scroll bars appear and scrolling happens. When the keyboard is then hidden
+// and the text areas grow, the scroll bars and position remain even though
+// the entire text could now be shown.
 
 /**
  * Translate text using the ROT13 cipher.
@@ -113,6 +120,14 @@ public class TranslatorActivity extends Activity {
       }
     });
 
+//    textOutput.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+//      @Override
+//      public void onLayoutChange(View v, int left, int top, int right, int bottom,
+//          int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//        // TODO(jz): Trying to improve resizing bevior.
+//        textOutput.scrollTo(0, 0);
+//      }
+//    });
     textInput.addTextChangedListener(new TextWatcher() {
       public void afterTextChanged(Editable editable) {
       }
@@ -125,6 +140,13 @@ public class TranslatorActivity extends Activity {
         StringBuffer translation = new StringBuffer(textOutput.getText());
         translation.replace(start, start + before, delta.toString());
         textOutput.setText(translation);
+
+        // Scroll the output TextView. If scrollbars were shown and text was
+        // deleted, scrollbars don't automatically disappear in textOutput.
+        // They keep an empty/nonexistent part of the text in the view.
+        //  TextView#bringPointIntoView() alone doesn't fix that.
+        textOutput.setScrollY(textInput.getScrollY());
+
         textOutput.bringPointIntoView(start + count);
       }
     });
