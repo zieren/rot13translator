@@ -1,5 +1,6 @@
 package de.zieren.rot13;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,7 +14,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import android.view.View.OnLayoutChangeListener;
+import android.view.View.OnLayoutChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -120,20 +121,14 @@ public class TranslatorActivity extends Activity {
       }
     });
 
-//    textOutput.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-//      @Override
-//      public void onLayoutChange(View v, int left, int top, int right, int bottom,
-//          int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//        // TODO(jz): Trying to improve resizing bevior.
-//        textOutput.scrollTo(0, 0);
-//      }
-//    });
+    maypeAddOnLayoutChangeListener();
     textInput.addTextChangedListener(new TextWatcher() {
       public void afterTextChanged(Editable editable) {
       }
       public void beforeTextChanged(
           CharSequence arg0, int arg1, int arg2, int arg3) {
       }
+      @SuppressLint("NewApi")
       public void onTextChanged(
           CharSequence s, int start, int before, int count) {
         final StringBuffer delta = translateROT13(s, start, count);
@@ -144,8 +139,12 @@ public class TranslatorActivity extends Activity {
         // Scroll the output TextView. If scrollbars were shown and text was
         // deleted, scrollbars don't automatically disappear in textOutput.
         // They keep an empty/nonexistent part of the text in the view.
-        //  TextView#bringPointIntoView() alone doesn't fix that.
-        textOutput.setScrollY(textInput.getScrollY());
+        // TextView#bringPointIntoView() alone doesn't fix that.
+        if (android.os.Build.VERSION.SDK_INT >= 14) {
+          textOutput.setScrollY(textInput.getScrollY());
+        } else {
+          // OK; best effort
+        }
 
         textOutput.bringPointIntoView(start + count);
       }
@@ -154,6 +153,21 @@ public class TranslatorActivity extends Activity {
         new InputFilter.LengthFilter(MAX_TEXT_LENGTH)
     });
   }
+
+  @SuppressLint("NewApi")
+  private void maypeAddOnLayoutChangeListener() {
+    if (android.os.Build.VERSION.SDK_INT >= 14) {
+      textOutput.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom,
+            int oldLeft, int oldTop, int oldRight, int oldBottom) {
+          textOutput.setScrollY(0);
+        }
+      });
+    }
+  }
+
+  // TODO(jz): Text with actual API 4.
 
   /** Returns a translation of the interval [start, start+count). */
   private StringBuffer translateROT13(
