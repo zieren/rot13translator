@@ -23,6 +23,7 @@ import android.widget.Toast;
 // TODO(jz): Eventually fix deprecation issues (when the number of users with
 // old versions is sufficiently low; currently it's 28% below API 11).
 
+// TODO(jz): Crashes on old API version.
 
 // TODO(jz): Flaw: When text areas are small due to the keyboard being shown,
 // scroll bars appear and scrolling happens. When the keyboard is then hidden
