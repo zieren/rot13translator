@@ -23,8 +23,6 @@ import android.widget.Toast;
 // TODO(jz): Eventually fix deprecation issues (when the number of users with
 // old versions is sufficiently low; currently it's 28% below API 11).
 
-// TODO(jz): Crashes on old API version.
-
 // TODO(jz): Flaw: When text areas are small due to the keyboard being shown,
 // scroll bars appear and scrolling happens. When the keyboard is then hidden
 // and the text areas grow, the scroll bars and position remain even though
@@ -144,10 +142,16 @@ public class TranslatorActivity extends Activity {
         if (android.os.Build.VERSION.SDK_INT >= 14) {
           textOutput.setScrollY(textInput.getScrollY());
         } else {
-          // OK; best effort
+          // This is OK; we don't scroll, it's just best effort.
         }
 
-        textOutput.bringPointIntoView(start + count);
+        // On API 10 (and possibly others), when changing screen orientation,
+        // this crashes inside TextView with an NPE. So it's best effort as well.
+        try {
+          textOutput.bringPointIntoView(start + count);
+        } catch (NullPointerException e) {
+          // too bad...
+        }
       }
     });
     textInput.setFilters(new InputFilter[] {
@@ -167,8 +171,6 @@ public class TranslatorActivity extends Activity {
       });
     }
   }
-
-  // TODO(jz): Text with actual API 4.
 
   /** Returns a translation of the interval [start, start+count). */
   private StringBuffer translateROT13(
