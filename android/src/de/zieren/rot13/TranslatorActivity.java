@@ -94,9 +94,8 @@ public class TranslatorActivity extends Activity {
     final Button buttonPaste = (Button) findViewById(R.id.button_paste);
     buttonPaste.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        // ClipboardManager#getText() occasionally seems to return null,
-        // although API docs don't mention that.
-        if (clipboard.getText() != null && clipboard.getText().length() == 0) {
+        // ClipboardManager#getText() returns null right after boot.
+        if (clipboard.getText() == null || clipboard.getText().length() == 0) {
           Toast.makeText(getApplicationContext(),
                          R.string.clipboard_empty,
                          Toast.LENGTH_LONG).show();
