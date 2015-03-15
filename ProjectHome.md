@@ -1,0 +1,1 @@
+Encode/decode text using the simple ROT13 substitution cipher. ROT13 is a means of hiding text from a casual glance, comparable to a magazine printing the solution to a quiz upside down. This is used e.g. on geocaching.com and opencaching.de.
